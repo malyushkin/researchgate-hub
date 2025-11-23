@@ -1,0 +1,53 @@
+# ─────────────────────────────────────────
+# Python cache / build artifacts
+# ─────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.pyd
+*.so
+
+build/
+dist/
+wheels/
+*.egg-info/
+.eggs/
+
+# Compiled notebooks
+*.ipynb_checkpoints/
+
+# ─────────────────────────────────────────
+# Virtual environments
+# ─────────────────────────────────────────
+.venv/
+env/
+venv/
+
+# uv lockfile & temporary cache
+uv.lock
+
+# ─────────────────────────────────────────
+# Environment variables
+# ─────────────────────────────────────────
+.env
+
+# ─────────────────────────────────────────
+# IDEs / editors
+# ─────────────────────────────────────────
+# PyCharm
+.idea/
+
+# VSCode
+.vscode/
+
+# ─────────────────────────────────────────
+# Project-specific
+# ─────────────────────────────────────────
+
+# Raw ResearchGate dumps
+src/researchgate_hub/raw/*.json
+
+# Logs
+*.log
