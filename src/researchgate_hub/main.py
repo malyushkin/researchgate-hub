@@ -1,10 +1,8 @@
 import argparse
 
-from publications import export_raw_publications
 from config import Config
-
-
-# from citations import process_citations_for_publications
+from citations import process_citations_for_publications
+from publications import export_raw_publications
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -59,8 +57,7 @@ def main() -> None:
         )
 
     elif args.command == "citations":
-        # process_citations_for_publications()
-        print("Citations mode is not enabled yet.")
+        process_citations_for_publications()
 
     else:
         parser.error("Unknown command")
