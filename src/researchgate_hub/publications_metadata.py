@@ -317,7 +317,7 @@ def process_publication_metadata(
 
 if __name__ == "__main__":
     process_publication_metadata(
-        "processed/all_unique_ids.csv",
+        "processed/tmp/unique_ids.csv",
         "processed/publications_overview.csv",
         batch_size=50,
         num_workers=3,

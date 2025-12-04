@@ -44,7 +44,7 @@ def build_parser() -> argparse.ArgumentParser:
     metadata_parser.add_argument(
         "--input",
         type=str,
-        default="all_unique_ids.csv",
+        default="unique_ids.csv",
         help="Path to the input CSV file containing 'publication_id' column."
     )
     metadata_parser.add_argument(
