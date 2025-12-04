@@ -3,6 +3,7 @@ import argparse
 from config import Config
 from citations import process_citations_for_publications
 from publications import export_raw_publications
+from publications_metadata import process_publication_metadata
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -39,6 +40,32 @@ def build_parser() -> argparse.ArgumentParser:
         help="Fetch citations for all publications in publications.csv",
     )
 
+    metadata_parser = subparsers.add_parser("metadata", help="Fetch metadata for a list of specific publication IDs.")
+    metadata_parser.add_argument(
+        "--input",
+        type=str,
+        default="all_unique_ids.csv",
+        help="Path to the input CSV file containing 'publication_id' column."
+    )
+    metadata_parser.add_argument(
+        "--output",
+        type=str,
+        default="publications_metadata.csv",
+        help="Path for the output CSV file to save metadata."
+    )
+    metadata_parser.add_argument(
+        "--batch-size",
+        type=int,
+        default=50,  # Новый аргумент для пакетной обработки
+        help="Number of articles to process before saving data incrementally."
+    )
+    metadata_parser.add_argument(
+        "--num-workers",
+        type=int,
+        default=4, # Новый аргумент для задания количества потоков
+        help="Number of concurrent threads/workers to use for fetching metadata."
+    )
+
     return parser
 
 
@@ -58,6 +85,14 @@ def main() -> None:
 
     elif args.command == "citations":
         process_citations_for_publications()
+
+    elif args.command == "metadata":
+        process_publication_metadata(
+            f"{Config.processed_data_path}/{args.input}",
+            f"{Config.processed_data_path}/{args.output}",
+            args.batch_size,
+            args.num_workers,
+        )
 
     else:
         parser.error("Unknown command")

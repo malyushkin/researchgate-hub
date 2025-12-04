@@ -1,17 +1,31 @@
 [project]
 name = "researchgate-hub"
 version = "0.1.0"
-description = "TBA"
+description = "ResearchGate data extraction and analysis tool."
 readme = "README.md"
 requires-python = ">=3.14"
+
 dependencies = [
     "python-dotenv>=1.2.1",
     "requests>=2.32.5",
     "zstandard>=0.25.0",
-    # draw
+    "cloudscraper",
+]
+
+
+[project.optional-dependencies]
+viz = [
     "pandas>=2.2.0",
     "networkx>=3.2.1",
     "matplotlib>=3.8.0",
     "scipy>=1.12.0",
     "pyvis>=0.3.0",
+]
+
+notebook = [
+    "jupyterlab>=4"
+]
+
+dev = [
+    "researchgate-hub[viz, notebook]",
 ]

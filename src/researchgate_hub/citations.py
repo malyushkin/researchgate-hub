@@ -88,7 +88,13 @@ def extract_citing_publications(store: dict) -> list[dict]:
         url_path = val.get("url")
         full_url = f"{BASE_URL}/{url_path}" if url_path else None
 
+        # Extract fields
+        pub_type = val.get("type")
         authors_raw = val.get("authorships") or []
+        publication_date = val.get("publicationDate")
+        abstract = val.get("abstract")
+        doi = val.get("doi")
+
         authors = [a.get("fullName") for a in authors_raw]
 
         publications.append(
@@ -96,7 +102,11 @@ def extract_citing_publications(store: dict) -> list[dict]:
                 "publication_id": pub_id,
                 "title": title,
                 "url": full_url,
+                "type": pub_type,
+                "publicationDate": publication_date,
                 "authors": authors,
+                "abstract": abstract,
+                "doi": doi,
             }
         )
 
@@ -220,7 +230,17 @@ def process_citations_for_publications() -> None:
     with citing_pubs_csv.open("w", encoding="utf-8", newline="") as f:
         writer = csv.DictWriter(
             f,
-            fieldnames=["topic", "publication_id", "title", "url", "authors"],
+            fieldnames=[
+                "topic",
+                "publication_id",
+                "title",
+                "type",
+                "url",
+                "publicationDate",
+                "authors",
+                "abstract",
+                "doi",
+            ],
         )
         writer.writeheader()
         for r in all_citing_pubs:
